@@ -1,0 +1,15 @@
+# GitHub Action: runs the eval pipeline on every PR that touches /prompts,
+# posts a summary comment, and blocks merge on critical regressions.
+name: Model Regression Eval
+on:
+  pull_request:
+    paths:
+      - "prompts/**"
+      - "golden_dataset/**"
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: echo "Eval pipeline steps go here"

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+data/runs.db
+results/raw/*
+results/processed/*
+!results/raw/.gitkeep
+!results/processed/.gitkeep
+.venv/
+venv/

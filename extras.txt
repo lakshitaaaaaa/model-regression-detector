@@ -1,0 +1,91 @@
+FILE STRUCTURE -
+
+model-regression-detector/
+│
+├── .github/
+│   └── workflows/
+│
+├── prompts/
+│
+├── golden_dataset/
+│
+├── src/
+│   │
+│   ├── feature/
+│   │   ├── classifier.py
+│   │   ├── config.py
+│   │   └── models.py
+│   │
+│   ├── llm/
+│   │   ├── groq_client.py
+│   │   ├── prompt_loader.py
+│   │   └── judge.py
+│   │
+│   ├── eval/
+│   │
+│   ├── alerting/
+│   │
+│   ├── reporting/
+│   │   ├── generator.py
+│   │   ├── dashboard.py
+│   │   ├── charts.py
+│   │   └── templates/
+│   │
+│   ├── database/
+│   │   ├── db.py
+│   │   └── models.py
+│   │
+│   └── utils/
+│       ├── logger.py
+│       ├── timer.py
+│       └── file_utils.py
+│
+├── data/
+│   ├── baseline/
+│   ├── run_history/
+│   └── runs.db
+│
+├── results/
+│   ├── raw/
+│   ├── processed/
+│   └── metrics/
+│
+├── reports/
+│
+├── tests/
+│
+├── scripts/
+│
+├── Dockerfile
+├── requirements.txt
+└── README.md
+
+----------------------------------------------------------------------------------------------------------------------------
+
+--- ISSUE 1 ---
+HOW DO I WANT THE LLM TO RETURN CATEGORY+SUMMARY TO ME?
+There are two ways in which the llm can return me the category+summary.
+Option A: Ask for JSON in plain text, parse it yourself
+
+You write a prompt like "Respond only with JSON: {category, summary}", get back a text string, then json.loads() it.
+
+✅ Works with any LLM provider, even ones with no structured-output feature
+✅ Simple to understand and debug — you can literally print the raw string
+❌ Fragile: the model might wrap it in ```json fences, add a preamble ("Sure, here's the classification:"), or occasionally produce malformed JSON. You have to defensively strip/clean before parsing.
+❌ Every parsing failure is your bug to catch and handle — not the API's
+
+Option B: Use Groq's structured output / tool-calling
+
+Groq's API (like OpenAI's) supports a "tool use" / function-calling mode where you define a schema up front, and the API is constrained to return arguments matching that schema.
+
+✅ Much more reliable — the model can't return junk text before/after
+✅ Pairs naturally with Pydantic (define schema once, reuse for both the API call and validation)
+❌ Slightly more setup — you define a "tool" the model is forced to "call"
+❌ Ties you a bit more to Groq's specific API shape (though most providers converge on the OpenAI-style tool-calling format now, so it's fairly portable)
+
+since this project is not about prompt engieering, rather it is about evaluating model quality, therefore going with option B.
+
+--- SOLUTION--- 
+Since the project is an evaluation framework, I wanted to eliminate parsing errors as a source of noise. Using structured outputs ensured that regressions reflected changes in model behavior rather than formatting inconsistencies. I also reused the same Pydantic schema across inference, validation, storage, and reporting.
+
+----------------------------------------------------------------------------------------------------------------------------

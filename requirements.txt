@@ -1,0 +1,25 @@
+# Core
+pydantic>=2.0
+pyyaml
+python-dotenv
+
+# LLM
+groq
+
+# Eval / scoring
+# deepeval or ragas (pick one)
+
+# Storage
+sqlalchemy
+
+# Reporting
+jinja2
+streamlit
+matplotlib
+
+# Alerting
+requests
+
+# Dev / testing
+pytest
+pytest-asyncio
