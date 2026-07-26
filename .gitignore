@@ -1,10 +1,31 @@
-__pycache__/
-*.pyc
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables
 .env
-data/runs.db
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# macOS
+.DS_Store
+
+# SQLite database
+data/*.db
+
+# Generated reports
+reports/*.html
+
+# Run history (generated during evaluations)
+data/run_history/*
+!data/run_history/.gitkeep
+
+# Results (if you create these later)
 results/raw/*
 results/processed/*
 !results/raw/.gitkeep
 !results/processed/.gitkeep
-.venv/
-venv/
