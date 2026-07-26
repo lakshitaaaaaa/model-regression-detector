@@ -10,7 +10,8 @@ from pydantic import BaseModel
 class PromptConfig(BaseModel):
     version: str
     model: str
-    temperature: int
+    temperature: float
+    max_tokens: int = 256
     system_prompt: str
 
 # in this, we are not including everything, such as top_k, max_tokens, frequency_penalty, response_penalty, etc because these are

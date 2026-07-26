@@ -10,9 +10,9 @@ class Category(str, Enum):
     BILLING = "billing"
     TECHNICAL = "technical"
     ACCOUNT = "account"
-    GENERAL = "geeral"
+    GENERAL = "general"
 
-class EnumClassification(BaseModel):
+class EmailClassification(BaseModel):
     category : Category
     summary : str
 

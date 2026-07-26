@@ -6,15 +6,17 @@ from pydantic import BaseModel
 T = TypeVar("T", bound=BaseModel)
 
 class BaseLLMClient(ABC):
+    
     @abstractmethod
     def generate(
         self,
         *,
         system_prompt: str,
         user_prompt: str,
-        response_model: type[BaseModel],
+        response_model: type[T],
         model: str,
         temperature: float,
+        max_tokens: int | None = None,
     ) -> T:
             #Send a prompt to an LLM and returns a validated Pydantic model.
         raise NotImplementedError 
