@@ -1,0 +1,117 @@
+[
+    {
+        
+        "id": "TC001",
+        "email": "account number : 0421afc66778\n\ni have just received a statement of this account. it contains charges for purchases i have not made. the transaction reference number is 3108996, the trader's name is Mr. Suryaprakash Yadav, the amount and date are ₹65,043 and 31/05/2026 respectively. \nI have not bought anything from this trade. Nor have I lost my card or given anyone else my number.\nEnclosed is a cheque for my bill, less the amount of the disputed transaction.\nPlease investigate the complaint as soon as possible and remove the disputed sum from my records so I don't incur charges while the matter is being sorted out.\n\nYours sincerely,\nNeha Roy",
+        "expected_category": "billing",
+        "expected_summary": "Customer disputes an unauthorized transaction and requests an investigation and removal of the disputed charge.",
+        "difficulty": "medium",
+        "notes": "Billing dispute with explicit key entity extraction fields (Account Number, Txn ID, Amount, Merchant, Date) and partial payment context."
+        
+    },
+    {
+        "id": "TC002",
+        "email": "dear sir/madam\n\ni am writing to formally request the opening of a savings account in your esteemed bank, the State Bank of India, at Rosalie Branch.\nI have been a resident of this area for several years and have heard highly positive feedback regarding the services offered by your bank. I would like to avail myself off these services by opening a savings account under my name.\nI've attached the necessary documents for the account opening, including Proof of identity (Aadhaar card), Proof of address (Aadhaar card), Passport-sized photographs and Completed account opening form.\nI would appreciate it if you could process my request at your earliest convenience. Should you require any further information, please do not hesitate to contact me at 9998087651 or via email at devinc@gmail.com.\nThank you for your attention to this matter, and I look forward to your prompt response.\nYours faithfully,\nDebin Chakraborty",
+        "expected_category": "account",
+        "expected_summary": "Customer is requesting to open a savings account and has attached the required KYC documents.",
+        "difficulty": "easy",
+        "notes": "Standard account creation request containing applicant contact information (phone, email) and mentioned document attachments."
+        
+    },
+    {
+        "id": "TC003",
+        "email": "Dear Sir/Madam,\n\nI am writing to formally apply for a personal loan of ₹2,00,000 from your bank to cover upcoming medical expenses. I have held an active savings account (Account No: 9876543210) with your branch for over three years.\n\nAll required documentation, including my salary slips, bank statements, and identity proof documents, are attached for your review. Please let me know if any further information is needed to process my application.\n\nThank you for your assistance, and I look forward to hearing from you soon.\n\nSincerely,\nAnish Kumar\nPhone: 9876501234",
+        "expected_category": "account",
+        "expected_summary": "Customer is submitting a request for a ₹2,00,000 personal loan and has attached the necessary financial and identification documents.",
+        "difficulty": "easy",
+        "notes": "Standard loan application request under account services, including loan amount and supporting attachment details."
+        
+    },
+    {
+        "id": "TC004",
+        "email": "Dear customer service,\n\nI am unable to log in into my pnb-one mobile application. even though i am entering the correct m-pin, yet the  system keeps redirecting me to the login screen again and again. This has been happening since the last three months. Please take a look into the matter. I will be truly grateful.\n\nSincerely,\nKashvi Nanda\nAcc No: 75880127ABCD",
+        "expected_category": "technical",
+        "expected_summary": "Customer is unable to log in to the mobile app due to repeated login screen redirection despite entering the correct MPIN.",
+        "difficulty": "easy",
+        "notes": "Technical login issue specific to mobile banking application (PNB One) and MPIN authentication loop."
+    },
+    {
+                
+        "id": "TC005",
+        "email": "Dear mahodaya\n\nMai, Anunay Sharma, aapke bank ka ek khatadhari hu. Mai apne bank khate ke sath mobile number, 9868635700, jodna chahta hu. Kripaya aap mere khate, 56866357HDFC, ke sath mera mobile number jod de, mai sada sapka aabhari rahunga.\n\nDhanyawaad",
+        "expected_category": "account",
+        "expected_summary": "Customer is requesting to link his mobile number to his bank account.",
+        "difficulty": "easy",
+        "notes": "Account update request involving mobile number linking to an existing account, written in Hinglish/Transliterated Hindi."
+        
+    },
+    {
+        "id": "TC006",
+        "email": "hi,\n\nI jst wanted to inquire abt the bank timings and loc. plz let me know will i need to schedule an appointment with a customer rep regarding the banking services. thnx.\n\nKiki Sunderban",
+        "expected_category": "general",
+        "expected_summary": "Customer is asking about branch timings, location, and appointment requirements for banking services.",
+        "difficulty": "easy",
+        "notes": "General inquiry written in informal/abbreviated English."
+        
+    },
+    {
+        "id": "TC007",
+        "email": "Dear Customer Support,\n\nI am writing to express my severe frustration regarding a series of unauthorized charges and technical glitches on my account (Acc: 8849201134). \n\nOn 15/07/2026, I noticed a debit of ₹12,450 (Ref: TXN998234) for a subscription I never authorized. Furthermore, every time I attempt to access the transaction dispute portal via the PNB One mobile app to raise a formal ticket, the app crashes and throws an 'Error Code 502: Bad Gateway' right after the OTP verification screen.\n\nBecause of this technical error, I am unable to file the dispute online, and now I am being charged a late fee on the disputed amount. I demand an immediate manual reversal of the ₹12,450 charge, a waiver of the late fees, and a fix for the gateway timeout on my app profile.\n\nRegards,\nVikramaditya Sen\nContact: 9876512345",
+        "expected_category": "billing",
+        "expected_summary": "Customer is requesting a manual refund and late fee waiver due to an unauthorized transaction and an app error 505 crash preventing online dispute submission.",
+        "difficulty": "hard",
+        "notes": "Complex multi-issue case combining an unauthorized transaction (billing) with an app crash/Error 502 (technical) and account fee waivers, requiring prioritization to the primary billing dispute."
+        
+    },
+    {
+            
+        "id": "TC008",
+        "email": "Dear IT Support Team,\n\nI am reaching out regarding a persistent issue with my net banking portal access. Every time I try to complete a funds transfer, the system prompts me for two-factor authentication, but the SMS OTP never arrives on my registered mobile device.\n\nI have verified that my mobile network signal is fine and I can receive SMS from other senders. I also tried triggering the OTP via the voice call option, but that failed with a 'Gateway Timeout (504)' error on the portal screen. My user ID is tech_user_44.\n\nCould you please check if there is an issue with the OTP gateway or if my account profile needs a resync?\n\nBest regards,\nRohan Mehta\nContact: 9811223344",
+        "expected_category": "technical",
+        "expected_summary": "Customer is unable to complete funds transfers due to unreceived SMS OTPs and a Gateway Timeout error when attempting voice OTP.",
+        "difficulty": "medium",
+        "notes": "Technical multi-factor authentication failure involving SMS gateway delivery issues and server timeout errors."
+        
+    },
+    {
+        "id": "TC009",
+        "email": "Why is there a Rs 500 charge on my bill for a mobile app subscription that crashes every time I open it?",
+        "expected_category": "billing",
+        "expected_summary": "Customer is questioning a ₹500 charge for a mobile app subscription that consistently crashes upon launch.",
+        "difficulty": "hard",
+        "notes": "Ambiguous case touching on both unauthorized/disputed billing charges and mobile app crashes (technical)."
+    },
+    {
+        "id": "TC010",
+        "email": "OTP issue.",
+        "expected_category": "technical",
+        "expected_summary": "Customer is reporting an issue regarding One-Time Password (OTP) delivery or validation.",
+        "difficulty": "medium",
+        "notes": "Extremely short email with minimal context requiring technical categorization based on key domain terms."
+    },
+    {
+        "id": "TC011",
+        "email": "i m not able to sync my acnt to mobile app, pls fix issue or update my passwrd",
+        "expected_category": "technical",
+        "expected_summary": "Customer is unable to sync their account with the mobile application and requests a password reset or technical resolution.",
+        "difficulty": "medium",
+        "notes": "Contains multiple typos and abbreviations ('m', 'acnt', 'pls', 'passwrd') while reporting a sync/login problem."
+    },
+    {
+        "id": "TC012",
+        "email": "Mera account balance deduction wrongly show ho raha hai, please check my statement.",
+        "expected_category": "billing",
+        "expected_summary": "Customer is reporting an incorrect account balance deduction and requesting a statement review.",
+        "difficulty": "medium",
+        "notes": "Mixed language (Hinglish) reporting an incorrect financial transaction/deduction."
+    },
+    {
+        "id": "TC013",
+        "email": "Oh wonderful! Your net banking portal has been down all day again. Fantastic service, truly top tier!",
+        "expected_category": "technical",
+        "expected_summary": "Customer is complaining sarcastically about persistent net banking portal downtime.",
+        "difficulty": "hard",
+        "notes": "Highly sarcastic email where positive surface sentiment masks a complaint about technical service availability."
+    }
+
+]

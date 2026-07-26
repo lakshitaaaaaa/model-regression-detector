@@ -1,0 +1,18 @@
+[
+    {
+        "id": "TC999",
+        "email": "Hello, I need help with my account.",
+        "expected_category": "finance",
+        "expected_summary": "Customer needs help with their account.",
+        "difficulty": "easy",
+        "notes": "Invalid category to test schema validation."
+    },
+    {
+    "id": "TC999",
+    "email": "hello",
+    "expected_category": "finance",
+    "expected_summary": "abc",
+    "difficulty": "easy",
+    "notes": "invalid category"
+  }
+]
