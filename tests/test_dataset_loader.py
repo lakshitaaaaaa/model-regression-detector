@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 from pydantic import ValidationError
 
@@ -5,6 +7,7 @@ from golden_dataset.loader import load_dataset
 from golden_dataset.schema import GoldenTestCase, Difficulty
 from src.feature.models import Category
 
+FIXTURES_DIR = Path(__file__).parent/"fixtures"
 
 def test_load_dataset_returns_expected_count():
     dataset = load_dataset("test_cases_v1.json")
@@ -32,9 +35,9 @@ def test_missing_file_raises_file_not_found():
 
 def test_invalid_dataset_raises_validation_error():
     with pytest.raises(ValidationError):
-        load_dataset("invalid_dataset.json")
+        load_dataset(FIXTURES_DIR / "invalid_dataset.json")
 
 
 def test_invalid_json_raises_value_error():
     with pytest.raises(ValueError):
-        load_dataset("bad_json.json")
+        load_dataset(FIXTURES_DIR / "bad_json.json")

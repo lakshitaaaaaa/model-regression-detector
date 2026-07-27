@@ -10,19 +10,22 @@ from golden_dataset.schema import GoldenTestCase
 DATASET_DIR = Path(__file__).parent
 
 
-def load_dataset(filename: str) -> list[GoldenTestCase]:
+def load_dataset(filename: str | Path) -> list[GoldenTestCase]:
     """
     Load and validate a golden dataset.
 
     Args:
-        filename: Dataset filename (e.g. "test_cases_v1.json")
+        filename: Either a bare filename resolved against the default
+                  golden_dataset/ directory (e.g. "test_cases_v1.json"),
+                  or a full/absolute Path pointing anywhere else
+                  (e.g. a test fixture path).
 
     Returns:
         A list of validated GoldenTestCase objects.
 
     Raises:
         FileNotFoundError: If the dataset file does not exist.
-        ValueError: If the JSON is malformed.
+        ValueError: If the JSON is malformed or not a list.
         ValidationError: If any test case does not match the schema.
     """
     dataset_path = DATASET_DIR / filename
