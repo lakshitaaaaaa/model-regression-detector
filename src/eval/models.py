@@ -7,6 +7,10 @@ class EvaluationStatus(str, Enum):
     FAIL = "fail"
     ERROR = "error"
 
+class SummaryEvaluation(BaseModel):
+    score: float | None = None
+    reasoning: str | None = None
+
 class EvaluationResult(BaseModel):
     test_case_id: str
 
@@ -19,8 +23,11 @@ class EvaluationResult(BaseModel):
     status: EvaluationStatus
 
     latency_ms: float
+
     input_tokens: int | None = None
     output_tokens: int | None = None
+
+    summary_evaluation: SummaryEvaluation | None = None
 
     error_message: str | None = None
 

@@ -2,6 +2,7 @@
 import time
 
 from golden_dataset.loader import load_dataset
+from src.eval.judge import BaseSummaryJudge
 from src.eval.models import EvaluationResult, EvaluationStatus
 from src.feature.classifier import EmailClassifier
 from src.eval.scoring import evaluate_category
@@ -12,9 +13,11 @@ class EvaluationRunner:
     def __init__(
             self,
             classifier: EmailClassifier,
+            summary_judge: BaseSummaryJudge,
             dataset_file: str = "test_cases_v1.json",
         ):
         self.classifier = classifier
+        self.summary_judge = summary_judge
         self.dataset_file = dataset_file
 
     def run(self) -> list[EvaluationResult]:
@@ -27,6 +30,11 @@ class EvaluationRunner:
             try:
                 start = time.perf_counter()
                 prediction = self.classifier.classify(test_case.email)
+
+                summary_evaluation = self.summary_judge.evaluate(
+                    expected= test_case.expected_summary,
+                    predicted= prediction.summary,
+                )
 
                 latency_ms = (time.perf_counter() - start) * 100
 
@@ -44,6 +52,8 @@ class EvaluationRunner:
 
                         expected_summary=test_case.expected_summary,
                         predicted_summary=prediction.summary,
+
+                        summary_evaluation=summary_evaluation,
 
                         status=status,
 
@@ -63,6 +73,8 @@ class EvaluationRunner:
                         expected_summary=test_case.expected_summary,
                         predicted_summary=test_case.expected_summary,
 
+                        summary_evaluation=summary_evaluation,
+
                         status=EvaluationStatus.ERROR,
 
                         latency_ms=0,
@@ -76,3 +88,23 @@ class EvaluationRunner:
     
 # it doesn't know anything about sqlLite, HTML, Slack, Accuracy, Reports. it only has a single responsibility
         
+"""
+
+              Email
+                │
+                ▼
+         EmailClassifier
+                │
+                ▼
+        EmailClassification
+          │            │
+          │            ▼
+          │      Summary Judge
+          │            │
+          └──────┬─────┘
+                 ▼
+         EvaluationResult
+
+runner now orchestrates two independent components.
+
+"""

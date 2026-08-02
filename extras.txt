@@ -93,3 +93,39 @@ Since the project is an evaluation framework, I wanted to eliminate parsing erro
 From now on, updating your repository is much easier because the link is already established. Whenever you modify your code, just run these three simple commands to update GitHub:Stage your changes:bashgit add .
 Use code with caution.Commit your changes:bashgit commit -m "Describe what you changed here"
 Use code with caution.Push directly to GitHub:bashgit push
+
+
+Persist evaluation runs as JSON snapshots
+Add regression diff engine
+Generate HTML evaluation reports
+Integrate Slack notifications
+Add GitHub Actions evaluation workflow
+Containerize evaluation system 
+
+
+                Prompt
+                  │
+                  ▼
+          EmailClassifier
+                  │
+                  ▼
+             Groq Client
+                  │
+                  ▼
+         EmailClassification
+                  │
+                  ▼
+          Evaluation Runner
+                  │
+                  ▼
+        Evaluation Results
+                  │
+          ┌───────┴────────┐
+          ▼                ▼
+      Scoring         Run History
+          │                │
+          └───────┬────────┘
+                  ▼
+            Regression Diff
+
+@abstractmethod - used at LLMClient and src/eval/judge.py (LLM-as-a-Judge)

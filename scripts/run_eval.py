@@ -8,7 +8,19 @@ from src.feature.classifier import EmailClassifier
 from src.llm.groq_client import GroqClient
 from src.llm.prompt_loader import load_prompt
 from src.eval.scoring import calculate_accuracy, count_results
-from src.storage.run_history import save_run
+from src.storage.run_history import (
+    latest_run,
+    load_run,
+    save_run
+)
+
+from src.eval.diff import compare_runs
+from src.eval.scoring import (
+    calculate_accuracy,
+    count_results
+)
+
+from src.eval.simple_judge import SimpleEvaluationJudge
 
 
 def main():
@@ -21,30 +33,78 @@ def main():
         prompt_config=config,
     )
 
-    runner = EvaluationRunner(classifier)
+    judge = SimpleEvaluationJudge()
+
+    runner = EvaluationRunner(
+        classifier=classifier,
+        summary_judge=judge
+    )
+
+    previos_file = latest_run()
+    previous_results = None
+
+    if previos_file is not None:
+        previous_results = load_run(previos_file)
 
     results = runner.run()
 
-    for result in results:
-        print(result)
-
+    passed, failed, errors = count_results(results)
     accuracy = calculate_accuracy(results)
-    count = count_results(results)
+
 
     print("-"*60)
 
     print(f"Total test cases : {len(results)}")
 
-    print(f"\nPassed           : {count[0]}")
-    print(f"Failed           : {count[1]}")
-    print(f"Error.           : {count[2]}")
+    print(f"\nPassed           : {passed}")
+    print(f"Failed           : {failed}")
+    print(f"Error.           : {errors}")
 
     print(f"\nAccuracy         : {accuracy:.2f}%")
 
-    filepath = save_run(results)
-    print(f"\nSaved run to: {filepath}")
-    
-    print("-"*60)
+    if previous_results is not None:
+
+        diff = compare_runs(previous_results, results)
+
+        print("\nRegression Summary")
+        print("-" * 60)
+
+        print(
+            f"Previous Accuracy : "
+            f"{diff.previous_accuracy:.2f}%"
+        )
+
+        print(
+            f"Current Accuracy : "
+            f"{diff.current_accuracy:.2f}%"
+        )
+
+        print(
+            f"Accuracy Delta :"
+            f"{diff.accuracy_delta:.2f}%"
+        )
+
+        print()
+
+        print(f"New Regressions : {len(diff.regressions)}")
+
+        if diff.regressions:
+            for tc in diff.regressions:
+                print(f"  - {tc}")
+
+        print()
+
+        print(f"Improvements : {len(diff.improvements)}")
+
+        if diff.improvements:
+            for tc in diff.improvements:
+                print(f"  + {tc}")
+
+
+        print("-"*60)
+
+        filepath = save_run(results)
+        print(f"\nSaved run to: {filepath}")
 
 
 if __name__ == "__main__":
